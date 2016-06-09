@@ -30,6 +30,7 @@ VOLUME "/import"
 
 EXPOSE 1111
 EXPOSE 8890
+EXPOSE 8080
 
 # you can override the following default values via env vars and start.sh will
 # replace them in the virtuoso.ini:
