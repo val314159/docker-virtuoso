@@ -4,7 +4,7 @@ MAINTAINER Joern Hees
 COPY virtuoso_deb /virtuoso_deb
 RUN echo "deb file:/virtuoso_deb ./" >> /etc/apt/sources.list
 
-RUN apt-get update && apt-get install -y --force-yes \
+RUN apt-get -y update && apt-get install -y --force-yes \
 		virtuoso-server \
 		virtuoso-vad-bpel \
 		virtuoso-vad-conductor \
@@ -24,6 +24,9 @@ RUN apt-get update && apt-get install -y --force-yes \
 # sadly it seems host mounted volumes aren't initialized, so back it up to
 # handle this inside start.sh
 RUN cp -a /var/lib/virtuoso-opensource-7 /var/lib/virtuoso-opensource-7.orig
+
+RUN apt-get install -y apt-utils
+RUN apt-get install -y telnet
 
 VOLUME "/var/lib/virtuoso-opensource-7"
 VOLUME "/import"

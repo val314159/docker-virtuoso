@@ -5,7 +5,10 @@ all: build
 	echo "To upload to docker hub, use 'make upload'"
 	echo
 
-build: Dockerfile start.sh virtuoso_deb wait_ready
+run: build
+	docker run -it val314159/docker-virtuoso run
+
+build: Dockerfile start.sh virtuoso_deb wait_ready README.md
 	docker build -t val314159/docker-virtuoso .
 
 upload: build

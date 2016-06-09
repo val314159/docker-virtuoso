@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 # set -x
-
+echo WERTGWHGDFFDDGFGDS $XXX WWW $ZZZ QQQ
 CONF_FILE=/etc/virtuoso-opensource-7/virtuoso.ini
 DB_DIR=/var/lib/virtuoso-opensource-7
 DB_DIR_ORIG=$DB_DIR.orig
@@ -72,9 +72,16 @@ fi
 if [[ $# -lt 1 || $# -gt 2 ]] ; then usage ; fi
 if [[ $# -eq 1 ]] ; then
 	case "$1" in
-		"run") ;;
-		"bash") exec bash ;;
-		*) usage
+	    "run")
+		echo RUNNNN1 $1
+		echo RUNNNN2 $2
+		echo RUNNNN3 $3
+		echo RUNNNN4 $4
+		echo RUNNNN5 $5
+		echo RUNNNN6 $6
+	    ;;
+	    "bash") exec bash ;;
+	    *) usage
 	esac
 fi
 if [[ $# -eq 2 && $1 != "import" ]] ; then usage ; fi
