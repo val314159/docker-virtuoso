@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 # set -x
-echo WERTGWHGDFFDDGFGDS $XXX WWW $ZZZ QQQ
+
 CONF_FILE=/etc/virtuoso-opensource-7/virtuoso.ini
 DB_DIR=/var/lib/virtuoso-opensource-7
 DB_DIR_ORIG=$DB_DIR.orig
@@ -72,19 +72,20 @@ fi
 if [[ $# -lt 1 || $# -gt 2 ]] ; then usage ; fi
 if [[ $# -eq 1 ]] ; then
 	case "$1" in
-	    "run")
-		echo RUNNNN1 $1
-		echo RUNNNN2 $2
-		echo RUNNNN3 $3
-		echo RUNNNN4 $4
-		echo RUNNNN5 $5
-		echo RUNNNN6 $6
-	    ;;
+	    "run") ;;
 	    "bash") exec bash ;;
 	    *) usage
 	esac
 fi
-if [[ $# -eq 2 && $1 != "import" ]] ; then usage ; fi
+if [[ $# -eq 2 && $1 == "run" ]] ; then
+    PORT=$2
+    check_numeric "Port Number" "$PORT"
+    echo Changing Port Number to $PORT . . .
+    perl -i -npe "s/ServerPort\s*=\s*8890/ServerPort = $PORT/" /etc/virtuoso-opensource-7/virtuoso.ini
+    echo =============== START
+    grep ServerPort /etc/virtuoso-opensource-7/virtuoso.ini
+    echo =============== END
+elif [[ $# -eq 2 && $1 != "import" ]] ; then usage ; fi
 
 if [[ -z $(ls "$DB_DIR") ]] ; then
 	# db dir is empty by host mount, re-init
