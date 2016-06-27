@@ -30,6 +30,11 @@ VOLUME "/import"
 
 EXPOSE 1111
 EXPOSE 8890
+EXPOSE 8080
+EXPOSE 80
+EXPOSE 443
+
+RUN perl -i -npe 's/8890/8080/g' /etc/virtuoso-opensource-7/virtuoso.ini
 
 # you can override the following default values via env vars and start.sh will
 # replace them in the virtuoso.ini:
